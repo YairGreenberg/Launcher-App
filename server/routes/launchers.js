@@ -44,4 +44,18 @@ router.get('/launchers/:id', async (req,res)=>{
     }
 })
 
+router.get('/launchers', async(req,res)=>{
+    try{
+        const launchers =await dbMongo.collection('launchers')
+        .find()
+        .toArray()
+
+        res.json({launchers})
+
+    }catch(error){
+        console.error(error)
+        res.status(500).json({error:'server error'})
+    }
+})
+
 export default router;
