@@ -1,8 +1,10 @@
 import React from 'react'
 import useAuthStore from '../store/authStore'
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   const {token} = useAuthStore();
+  const navigate = useNavigate();
     
   return (
     <div>
@@ -12,8 +14,9 @@ function HomePage() {
       <div>
         <h4>Launcher management</h4>
       </div>
-      <button>
-        
+      <button onClick={()=> navigate(token ? '/launcher' : '/auth')}>
+        {token ? 'conect' : 'register'}
+
       </button>
       
     </div>
