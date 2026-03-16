@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import routerAuth from './routes/auth.js';
+import router from './routes/launchers.js';
 
 
 
@@ -11,6 +12,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/',routerAuth)
+app.use('/api',router)
 
 
 

@@ -2,6 +2,7 @@ import 'dotenv'
 import dbMongo from '../data/connectedMongoDb.js'
 import express from 'express';
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 import {v4 as uuidv4} from 'uuid'
 
 const JWT_secret ='secret_key'      // process.env.JWT_secret
@@ -21,7 +22,7 @@ routerAuth.post('/rgister',async (req,res)=>{
             username:username,
             passwordHash:passwordHash
         }
-        const addUser = await dbMongo.collaction("users").insertOne(user)
+        const addUser = await dbMongo.collection("users").insertOne(user)
         res.status(201).json({success: 'user added successfuly'})
     }catch(error){
         console.error(error)
@@ -30,7 +31,7 @@ routerAuth.post('/rgister',async (req,res)=>{
 })
 
 
-routerAuth.post('login', async(req,res)=>{
+routerAuth.post('/login', async(req,res)=>{
     const {password,username} = req.body
 
     if(!password||!username){
@@ -45,7 +46,7 @@ routerAuth.post('login', async(req,res)=>{
         if(!valid){
             return res.status(401).json({error: 'invlid password'})            
         }
-        const token = jwt.sign({id:user.id,username: user.username },JWT_secret,{expireIn: '24h'})
+        const token = jwt.sign({id:user.id,username: user.username },JWT_secret,{expiresIn: '24h'})
         res.json({
             token,
             user:{
