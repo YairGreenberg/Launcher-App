@@ -22,7 +22,7 @@ const useAuthStore = create<AuthStore>((set)=>({
         set({token: data.token,username: data.username})
     },
     register: async (username,password)=>{
-        await axios.post('http://localhost:5011/auth/register',{username,password})
+        await axios.post('http://localhost:5011/register',{username,password})
     }
 }))
     

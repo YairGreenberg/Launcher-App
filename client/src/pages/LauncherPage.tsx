@@ -19,7 +19,6 @@ function LauncherPage() {
                 console.error(error)
                 navigate('/auth')
             }
-
         }
     },[])
   return (

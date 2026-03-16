@@ -3,7 +3,7 @@ import {useNavigate } from "react-router-dom"
 import useAuthStore from '../store/authStore'
 
 function AuthPage() {
-    const [islogin, setIsLogin] = useState(true)
+    const [islogin, setIsLogin] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const { login, register } = useAuthStore()
@@ -47,7 +47,9 @@ function AuthPage() {
                         required
                     />
                     <p>
-                        <button>
+                        <button
+                        type='submit'
+                        >
                             {islogin ? 'connect' : 'register'}
                         </button>
                     </p>
