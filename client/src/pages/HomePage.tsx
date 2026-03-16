@@ -31,9 +31,9 @@ function HomePage() {
       <div>
         <h4>Launcher management</h4>
       </div>
-      <button onClick={()=> navigate(token ? '/launcher' : '/auth')}>
+      {/* <button onClick={()=> navigate(token ? '/launcher' : '/auth')}>
         {token ? 'conect' : 'register'}
-      </button>
+      </button> */}
       <h2>All launchers</h2>
       <LaunchersTable launchers={launchers}/>
 

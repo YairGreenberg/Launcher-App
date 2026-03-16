@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Launcher } from '../types/type-index';
+import {type Launcher } from '../types/type-index';
 import useAuthStore from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
