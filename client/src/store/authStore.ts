@@ -11,8 +11,6 @@ interface AuthStore {
 }
 
 
-
-
 const useAuthStore = create<AuthStore>((set)=>({
     token: localStorage.getItem('token'),
     username: localStorage.getItem('username'),
