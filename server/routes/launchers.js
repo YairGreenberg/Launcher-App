@@ -31,4 +31,17 @@ router.post('/launchers', async(req,res)=>{
 
 })
 
+router.get('/launchers/:id', async (req,res)=>{
+    try{
+        const launcher = await dbMongo.collection('launchers').findOne({id: req.params.id})
+        if(!launcher){
+            return res.status(404).json({error:'launcher not found'})
+        }
+        res.json({launcher})
+    }catch(error){
+        console.error(error)
+        res.status(500).json({error:'server error'})
+    }
+})
+
 export default router;
