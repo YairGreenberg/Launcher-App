@@ -8,19 +8,17 @@ function LoginPage() {
   const [username,setUsername] =useState('')
   const [password,setPassword] = useState('')
   const authContext = useAuth()
-  console.log(authContext)
   const {login} = authContext || {login: ()=>{}}
   const navigate = useNavigate()
 
   const hndaleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(111)
     try{
       const {data} = await axios.post('http://localhost:5011/api/auth/login',{
         username,password
       })
     
-      login(data.token, data.user.username, data.user_type)
+      login(data.token, data.user.username, data.user.user_type)
       navigate('/launchers')
     }catch(error){
       console.error(error)

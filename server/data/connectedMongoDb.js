@@ -16,6 +16,7 @@ async function connectedToMongo(){
         const data = client.db(CONTROLER_NAME)
         console.log('connected to MongoDB')
         return data
+        
     }catch(error){
         console.error("connected error:",error)
     }
