@@ -11,8 +11,8 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-app.use('/',routerAuth)
-app.use('/api',router)
+app.use('/api/auth',routerAuth)
+app.use('/api/auth',router)
 
 
 
