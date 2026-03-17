@@ -24,6 +24,7 @@ routerAuth.post('/rgister/create', authToken, requireAdmin, async (req, res) => 
             passwordHash: passwordHash,
             email: email,
             user_type: user_type,
+            last_login:null
 
         }
         const addUser = await dbMongo.collection("users").insertOne(user)

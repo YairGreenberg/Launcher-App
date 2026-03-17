@@ -1,6 +1,8 @@
 import express from 'express';
 import {v4 as uuidv4} from 'uuid'
 import dbMongo from '../data/connectedMongoDb.js';
+import { requireAirForce, requireIntellience } from '../middleware/middlewarAuth.js';
+
 
 
 const router = express();
@@ -8,7 +10,7 @@ const router = express();
 
 
 
-router.post('/launchers', async(req,res)=>{
+router.post('/launchers',requireIntellience, async(req,res)=>{
     const { city,rocketType,latitude,longitude,name } = req.body
     if(!city||!rocketType||!latitude||!longitude||!name){
         return res.status(401).json({error: 'input all catgory!'})
@@ -31,7 +33,7 @@ router.post('/launchers', async(req,res)=>{
 
 })
 
-router.get('/launchers/:id', async (req,res)=>{
+router.get('/launchers/:id',requireAirForce, async (req,res)=>{
     try{
         const launcher = await dbMongo.collection('launchers').findOne({id: req.params.id})
         if(!launcher){
@@ -44,7 +46,7 @@ router.get('/launchers/:id', async (req,res)=>{
     }
 })
 
-router.get('/launchers', async(req,res)=>{
+router.get('/launchers',requireAirForce, async(req,res)=>{
     try{
         const launchers =await dbMongo.collection('launchers')
         .find()

@@ -12,7 +12,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api/auth',routerAuth)
-app.use('/api/auth',router)
+app.use('/api',router)
 
 
 

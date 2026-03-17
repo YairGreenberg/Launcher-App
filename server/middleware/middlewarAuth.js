@@ -40,3 +40,10 @@ export function requireIntellience(req,res,next){
     }
     next();
 }
+
+export function requireAirForce(req,res,next){
+    if(!req.user.user_type !== 'admin' || !req.user.user_type !== 'intelligence' || !req.user.user_type !== 'airforce'){
+        return res.status(403).json({error: 'only user'})
+    }
+    next()
+}
