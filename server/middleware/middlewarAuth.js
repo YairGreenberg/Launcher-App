@@ -18,6 +18,7 @@ export async function authToken(req,res,next){
             return res.status(401).json({error: 'user not found'})
         }
         req.user = user;
+        console.log(req.user)
         next()
     }catch(error){
         console.error(error)
@@ -27,7 +28,7 @@ export async function authToken(req,res,next){
 
 
 export function requireAdmin(req,res,next){
-    if(!req.user.user_type !== 'admin'){
+    if(req.user.user_type !== 'admin'){
         return res.status(403).json({error: 'only admin require'})
     }
     next()
