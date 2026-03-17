@@ -54,7 +54,7 @@ routerAuth.post('/login', async (req, res) => {
         await dbMongo.collection('users').updateOne({ id: user.id }, { $set: { last_login: new Date() } })
 
 
-        const token = jwt.sign({ id: user.id, username: user.username }, JWT_secret, { expiresIn: '24h' })
+        const token = jwt.sign({ id: user.id, username: user.username }, JWT_secret, { expiresIn: '48h' })
         res.json({
             token,
             user: {

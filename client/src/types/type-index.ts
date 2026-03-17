@@ -5,3 +5,7 @@ export interface Launcher {
     longitude: number,
     city: string
 }
+
+export interface User {
+    
+}

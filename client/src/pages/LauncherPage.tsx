@@ -13,14 +13,16 @@ function LauncherPage() {
     useEffect( ()=>{
         const fetchLauchers = async ()=>{
             try{
-                const res = await axios.get('http://localhost:5011/launchers')
+                const res = await axios.get('http://localhost:5011/api/launchers')
+                console.log(res)
 
             }catch(error){
                 console.error(error)
                 navigate('/auth')
             }
         }
-    },[])
+    },[]
+)
   return (
     <div>
         <div>
