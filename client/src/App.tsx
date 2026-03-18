@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import './App.css'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage';
@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
+  // const navigate = useNavigate();
 
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
         <AuthProvider>
 
           <Routes>
+            <Route path='/' element={<Navigate to='/login' replace/>}></Route>
             <Route path='/login' element={<LoginPage />}></Route>
             <Route path='/launchers' element={<ProtectedRoute><HomePage /></ProtectedRoute>}></Route>
             <Route path='/launchers/add' element={<ProtectedRoute><AddLauncherPage /></ProtectedRoute>}></Route>
