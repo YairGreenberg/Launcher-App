@@ -1,5 +1,5 @@
-import React from 'react'
 import type { Launcher } from '../types/type-index'
+import {  useNavigate } from 'react-router-dom'
 
 
 interface Props {
@@ -8,7 +8,8 @@ interface Props {
 
 
 function LaunchersTable({launchers}:Props) {
-  return (
+    const navigate = useNavigate();
+    return (
     <div>
         <table>
             <thead>
@@ -24,6 +25,7 @@ function LaunchersTable({launchers}:Props) {
                 {launchers.map(l=>(
                     <tr
                     key={l.id}
+                    onClick={() => navigate(`/launchers/${l.id}`)}
                     >
                         <td>{l.name}</td>
                         <td>{l.rocketType}</td>

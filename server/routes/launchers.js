@@ -1,7 +1,7 @@
 import express from 'express';
 import {v4 as uuidv4} from 'uuid'
 import dbMongo from '../data/connectedMongoDb.js';
-import { requireAirForce, requireIntellience } from '../middleware/middlewarAuth.js';
+import { authToken, requireAirForce, requireIntellience } from '../middleware/middlewarAuth.js';
 
 
 
@@ -10,7 +10,7 @@ const router = express();
 
 
 
-router.post('/launchers',requireIntellience, async(req,res)=>{
+router.post('/launchers',authToken,requireIntellience, async(req,res)=>{
     const { city,rocketType,latitude,longitude,name } = req.body
     if(!city||!rocketType||!latitude||!longitude||!name){
         return res.status(401).json({error: 'input all catgory!'})
@@ -33,12 +33,13 @@ router.post('/launchers',requireIntellience, async(req,res)=>{
 
 })
 
-router.get('/launchers/:id',requireAirForce, async (req,res)=>{
+router.get('/launchers/:id',authToken,requireAirForce, async (req,res)=>{
     try{
         const launcher = await dbMongo.collection('launchers').findOne({id: req.params.id})
         if(!launcher){
             return res.status(404).json({error:'launcher not found'})
         }
+        console.log(launcher)
         res.json({launcher})
     }catch(error){
         console.error(error)
@@ -46,7 +47,7 @@ router.get('/launchers/:id',requireAirForce, async (req,res)=>{
     }
 })
 
-router.get('/launchers',requireAirForce, async(req,res)=>{
+router.get('/launchers',authToken,requireAirForce, async(req,res)=>{
     try{
         const launchers =await dbMongo.collection('launchers')
         .find()

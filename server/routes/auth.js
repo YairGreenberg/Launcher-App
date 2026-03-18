@@ -10,7 +10,7 @@ const JWT_secret = 'secret_key'      // process.env.JWT_secret
 const routerAuth = express()
 
 
-routerAuth.post('/rgister/create', authToken, requireAdmin, async (req, res) => {
+routerAuth.post('/register/create', authToken, requireAdmin, async (req, res) => {
     try {
         const { username, password, email, user_type } = req.body
         if (!username || !password || !email || !user_type) {
@@ -56,10 +56,8 @@ routerAuth.post('/login', async (req, res) => {
 
         const token = jwt.sign({ id: user.id, username: user.username }, JWT_secret, { expiresIn: '48h' })
         res.json({
-            token,
-            user: {
-                username: `${user.username} login`
-            }
+            token,user
+           
         })
     } catch (error) {
         console.error(error)
@@ -74,6 +72,18 @@ routerAuth.get('/getUser', authToken, async (req, res) => {
             return res.status(401).json({ error: 'user not found' })
         }
         res.json(user)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: "server error" })
+    }
+})
+routerAuth.get('/getUsers', authToken,requireAdmin, async (req, res) => {
+    try {
+        const users = await dbMongo.collection('users').find().toArray()
+        if (!users) {
+            return res.status(401).json({ error: 'users not found' })
+        }
+        res.json(users)
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: "server error" })

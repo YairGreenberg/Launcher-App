@@ -35,14 +35,14 @@ export function requireAdmin(req,res,next){
 }
 
 export function requireIntellience(req,res,next){
-    if(!req.user.user_type !== 'admin' || !req.user.user_type !== 'intelligence'){
+    if(req.user.user_type !== 'admin' && req.user.user_type !== 'intelligence'){
         return res.status(403).json({error: 'only admin or intelligence  require'})
     }
     next();
 }
 
 export function requireAirForce(req,res,next){
-    if(!req.user.user_type !== 'admin' || !req.user.user_type !== 'intelligence' || !req.user.user_type !== 'airforce'){
+    if(req.user.user_type !== 'admin' && req.user.user_type !== 'intelligence' && req.user.user_type !== 'airforce'){
         return res.status(403).json({error: 'only user'})
     }
     next()
